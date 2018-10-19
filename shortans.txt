@@ -1,0 +1,139 @@
+Pictoral Loop Invariants by Stefan Ilic and Andrew Park
+
+1. The proper exit condition for our loop is:
+
+   while (l_spot <= r_spot) { ... }
+
+   This is because last time we want to execute the body of the loop is
+ when l_spot = r_spot because at that point, there is only one unexamined
+ element left in between a[left] and a[right]. Then, when l_spot exceeds
+ r_spot, all of the elements in betwen a[left] and a[right] have been
+ examined.
+
+2.
+i) Ascending case:
+
+inputted array: 1 2 3 4 5 6 7 8 9 
+partitioned array: 1 2 3 4 5 6 7 8 9
+
+ii) Descending case:
+
+inputted array: 9 8 7 6 5 4 3 2 1 
+parititioned array: 1 8 7 6 5 4 3 2 9
+
+iii) Mixed case:
+
+inputted array: 2 4 123 34 56 1 -20 3 5 294 
+parititioned array: 1 -20 2 34 56 123 4 3 5 294
+
+3.
+i) Mixed cases:
+
+inputted array: 2 12 -23 62 -6 21 123 -55 
+4th smallest: 2
+
+inputted array: 2 12 -23 62 -6 21 123 -55 
+7th smallest: 62
+
+
+ii) Ascending case:
+
+inputted array: -64 -12 -1 14 123 142 2000 
+3th smallest: -1
+
+iii) Descending case:
+
+inputted array: 2000 142 123 14 -1 -12 -64 
+3th smallest: -1
+
+4.
+i) Even number length, ascending case:
+
+inputted array: 1 2 3 4 5 6 
+median: 3.5
+
+ii) Even number length, descending case:
+
+inputted array: 6 5 4 3 2 1 
+median: 3.5
+
+iii) Odd number length, ascending case:
+
+inputted array: 1 2 3 4 5 
+median: 3.0
+
+iv) Odd number length, descending case:
+
+inputted array: 5 4 3 2 1 
+median: 3.0
+
+v) Odd number length, mixed case:
+
+inputted array: 2 12 -23 62 -6 21 123 
+median: 12.0
+
+vi) Even number length, mixed case:
+
+inputted array: 2 12 -23 62 -6 21 123 -55 
+median: 32.0
+
+5.
+
+6. We chose invariant A and invariant D.
+For invariant A, we have three variables: w1, b1, and u1. w1 represents the index of the first white
+element. b1 represents the index of the first blue element. u1 represents
+the index of the first unexamined element.
+
+For invariant D, we have three variables: u1, r1, and w1. u1 represents the
+index of the last unexamined element. r1 represents the index of the last
+red element. w1 represents the index of the last white element.
+
+7.
+For invariant A, initially, the every element in the array is unexamined so
+the first white element (w1), the first blue element (b1), and the first
+unexamined element (u1) are index 0. So, w1 = b1 = u1 = 0.
+
+For invariant D, initially, the every element in the array is unexamined so
+the last unexamined element (u1), the last red element (r1), and the last
+white element (w1) are index array.length - 1. So, u1 = r1 = w1 =
+array.length - 1.
+
+8. See the DutchNatFlag class code.
+
+9. We considered 7 test cases to thoroughly work our implementations to
+solve the Dutch National Flag Problem:
+1) Thorough mixing. In an array of size 50 we set alternating colors such
+that every third color starting with the first color was red, every third
+color starting with the second color was blue, and the rest were white.
+
+2) The first (leftmost) third of the colors were blue, the second third
+red, the third (rightmost or last) third white.
+
+3) The first third of the colors were blue, the second third white, the third
+third red.
+
+4) The first third of the colors were white, the second third red, the third
+third blue.
+
+5) The first third of the colors were white, the second third blue, the third
+third red.
+
+6) The first third of the colors were red, the second third blue, the third
+third white.
+
+7) The first third of the colors were red, the second third white, the third
+third blue.
+
+For each of the above test cases, we ran both approachA and approachD on
+the array and verified that the correct order (red - white - blue) was
+created.
+
+Note that two of the seven cases posed particular difficulty for the
+algorithm. For the implementation of Invariant D (approach D), the case
+where the first third were white, the second third were blue, and the last
+third were red, the algorithm had to be modified to deal with the special
+case where there were examined red elements but no examined white and blue
+elements. A similar case (in this instance: blue then white then red)
+occured with the implementation of Invariant A (approach A). Testing of
+these two particular cases was critical to ensuring we had written the
+correct algorithm.
